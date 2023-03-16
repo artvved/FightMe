@@ -14,7 +14,7 @@ namespace Game.System
         private readonly EcsPoolInject<AttackTickComponent> tickPool = default;
         private readonly EcsPoolInject<AttackTargetComponent> attackTargetPool = default;
         private readonly EcsPoolInject<UnitComponent> unitPool = default;
-        //private readonly EcsPoolInject<ApplyDamageEventComponent> applyDamagePool = Startup.EVENT_WORLD;
+       
         private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Startup.EVENT_WORLD;
 
         private EcsFilter attackTickFilter;
@@ -24,7 +24,9 @@ namespace Game.System
         {
             world = systems.GetWorld();
 
-            attackTickFilter = world.Filter<AttackTickComponent>().Inc<AttackTargetComponent>().End();
+            attackTickFilter = world.Filter<AttackTickComponent>()
+                .Inc<AttackTargetComponent>()
+                .End();
         }
 
         public void Run(IEcsSystems systems)

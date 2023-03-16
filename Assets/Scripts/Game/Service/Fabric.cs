@@ -5,6 +5,7 @@ using Leopotam.EcsLite;
 using Mitfart.LeoECSLite.UnityIntegration;
 using ScriptableData;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Game.Service
 {
@@ -17,6 +18,8 @@ namespace Game.Service
 
         private EcsPool<UnitViewComponent> viewPool;
         private EcsPool<PlayerTag> playerPool;
+        private EcsPool<AllyTag> allyPool;
+        private EcsPool<EnemyTag> enemyPool;
        
         private EcsPool<UnitComponent> unitPool;
         private EcsPool<SpeedComponent> speedPool;
@@ -35,7 +38,10 @@ namespace Game.Service
             this.staticData = staticData;
 
             viewPool = world.GetPool<UnitViewComponent>();
+            
             playerPool = world.GetPool<PlayerTag>();
+            allyPool = world.GetPool<AllyTag>();
+            enemyPool = world.GetPool<EnemyTag>();
             
             unitPool = world.GetPool<UnitComponent>();
             speedPool = world.GetPool<SpeedComponent>();
@@ -81,19 +87,23 @@ namespace Game.Service
         {
             var playerEntity = InstantiateUnit(staticData.PlayerPrefab, Vector3.zero, staticData.PlayerStats);
             playerPool.Add(playerEntity);
-
-
+            allyPool.Add(playerEntity);
             return playerEntity;
         }
 
         public int InstantiateEnemy(Vector3 pos)
         {
             var enemyEntity = InstantiateUnit(staticData.EnemyPrefab, pos, staticData.EnemyStats);
-            directionPool.Add(enemyEntity).Value = Vector3.left;
-
+            enemyPool.Add(enemyEntity);
             return enemyEntity;
         }
 
-       
+
+        public int InstantiateBoss(Vector3 pos)
+        {
+            var enemyEntity = InstantiateUnit(staticData.BossPrefab, pos, staticData.BossStats);
+            enemyPool.Add(enemyEntity);
+            return enemyEntity;
+        }
     }
 }

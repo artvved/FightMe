@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb8fbb7b254fdda61cb71497385c6c, type: 3}
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
-  Speed: 2
+  Speed: 1
   MaxHp: 30
-  Damage: 5
-  Range: 1.5
+  Damage: 1
+  Range: 1
   AttackRatio: 1
   Coins: 10
+  HpRegenValue: 0
+  HpRegenSpeed: 0

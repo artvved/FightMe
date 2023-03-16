@@ -20,7 +20,7 @@ namespace Game.System
 
         private readonly EcsPoolInject<TickComponent> tickPool = default;
         private readonly EcsPoolInject<SpawnEnemyTickComponent> spawnEnemyTickPool = default;
-
+        private readonly EcsPoolInject<EnemySpawnedBeforeBossCountComponent> enemyCountPool = default;
 
         private EcsFilter filter;
 
@@ -34,6 +34,7 @@ namespace Game.System
             var newEntity = world.NewEntity();
             tickPool.Value.Add(newEntity);
             spawnEnemyTickPool.Value.Add(newEntity).Value = staticData.Value.EnemySpawnPeriod;
+            enemyCountPool.Value.Add(newEntity);
         }
 
         public void Run(IEcsSystems systems)

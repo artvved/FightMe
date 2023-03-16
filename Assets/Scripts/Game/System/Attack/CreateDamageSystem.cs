@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.System
 {
-    public class UnitAttackSystem : IEcsInitSystem, IEcsRunSystem
+    public class CreateDamageSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld world;
         private EcsWorld eventWorld;
@@ -32,7 +32,7 @@ namespace Game.System
         {
             foreach (var entity in eventFilter)
             {
-                if (!createAttackPool.Value.Get(entity).Creator.Unpack(world,out int creator) || playerPool.Value.Has(creator))
+                if (!createAttackPool.Value.Get(entity).Creator.Unpack(world,out int creator))
                 {
                     continue;
                 }

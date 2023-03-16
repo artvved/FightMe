@@ -35,23 +35,31 @@ public class Startup : MonoBehaviour
             
             .Add(new SpawnEnemyTickSystem())
             .Add(new SpawnEnemySystem())
+            
+            .Add(new TargetingSystem())
+            
+            .Add(new MoveToTargetSystem())
+            .Add(new MoveApplySystem())
+            
             .Add(new RangeCrossingSystem())
+            
             .Add(new AttackTickSystem())
-            .Add(new UnitAttackSystem())
+            .Add(new CreateDamageSystem())
+
            
-            
-            
-            .Add(new MoveSystem())
             
             .Add(new ApplyDamageSystem())
+            
+            .Add(new CoinGainSystem())
+            
             .Add(new SpawnHpViewSystem())
             .Add(new SpawnDamageViewSystem())
-            .Add(new CoinGainSystem())
             .Add(new UpdateCoinsViewSystem())
-           
+            .Add(new LifetimeSystem())
+            .Add(new TickSystem())
             .Add(new DestroyDamagedSystem())
             .Add(new UpdateHpViewSystem())
-            .Add(new TickSystem())
+            
             .DelHere<CoinsChangedEventComponent>(EVENT_WORLD)
             .DelHere<ApplyDamageEventComponent>(EVENT_WORLD)
             .DelHere<CreateAttackEventComponent>(EVENT_WORLD)

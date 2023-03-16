@@ -4,6 +4,6 @@ namespace Game.Component
 {
     public struct DirectionComponent
     {
-        public Vector3 Value;
+        public Vector2 Value;
     }
 }

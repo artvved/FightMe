@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Game.System
 {
-    public class MoveSystem : IEcsInitSystem, IEcsRunSystem
+    public class MoveApplySystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld world;
       
@@ -42,7 +42,7 @@ namespace Game.System
                 var direction = directionPool.Value.Get(entity).Value;
                 var valueTransform = transformPool.Value.Get(entity).Value.transform;
                 
-                var delta = Time.deltaTime * speed * direction;
+                Vector3 delta = Time.deltaTime * speed * direction;
                 valueTransform.position += delta;
                 
 

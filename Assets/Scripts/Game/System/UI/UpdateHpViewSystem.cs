@@ -52,7 +52,7 @@ namespace Game.System
                 var pos = unitTransformPool.Value.Get(entity).Value.transform.position;
 
                 var screenPoint = camera.WorldToScreenPoint(pos);
-                view.transform.position = screenPoint;
+                view.transform.position = screenPoint+new Vector3(0,15f);
             }
         }
     }
