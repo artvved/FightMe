@@ -31,6 +31,7 @@ public class Startup : MonoBehaviour
         systems
             .AddWorld(eventWorld,EVENT_WORLD)
             .Add(new InitPlayerWithCameraSystem())
+            .Add(new SpellButtonsInputCheckSystem())
             
             .Add(new RegenTickSystem())
             
@@ -45,6 +46,8 @@ public class Startup : MonoBehaviour
             .Add(new RangeCrossingSystem())
             
             .Add(new AttackTickSystem())
+            .Add(new ChainLightningAttackSystem())
+            
             .Add(new CreateDamageSystem())
 
            
@@ -59,8 +62,11 @@ public class Startup : MonoBehaviour
             .Add(new LifetimeSystem())
             .Add(new TickSystem())
             .Add(new DestroyDamagedSystem())
-            .Add(new UpdateHpViewSystem())
             
+            .Add(new UpdateHpViewSystem())
+            .Add(new UpdateSpellButtonsCDSystem())
+            
+            .DelHere<ChainLightningSpellEventComponent>(EVENT_WORLD)
             .DelHere<CoinsChangedEventComponent>(EVENT_WORLD)
             .DelHere<ApplyDamageEventComponent>(EVENT_WORLD)
             .DelHere<CreateAttackEventComponent>(EVENT_WORLD)
@@ -73,6 +79,7 @@ public class Startup : MonoBehaviour
             .Inject(new Fabric(world,eventWorld,staticData))
             .Inject(sceneData)
             .Inject(staticData)
+            .Inject(new PositionService(world))
             .InjectUgui(sceneData.EcsUguiEmitter,EVENT_WORLD)
             .Init();
         

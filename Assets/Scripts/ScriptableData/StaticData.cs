@@ -10,6 +10,7 @@ namespace ScriptableData
         public UnitStats PlayerStats;
         public UnitStats EnemyStats;
         public UnitStats BossStats;
+        public CasterStats PlayerCasterStats;
         
         public PlayerView PlayerPrefab;
         public EnemyView EnemyPrefab;

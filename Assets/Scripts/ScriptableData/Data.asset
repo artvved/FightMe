@@ -15,10 +15,11 @@ MonoBehaviour:
   PlayerStats: {fileID: 11400000, guid: ed483b6b86d4dea42a172f54f60c66ce, type: 2}
   EnemyStats: {fileID: 11400000, guid: e5c221523c5f2cf42bfab73011cf18aa, type: 2}
   BossStats: {fileID: 11400000, guid: a8b6148b149a10648b0aa05961937853, type: 2}
+  PlayerCasterStats: {fileID: 11400000, guid: 2ee5c1deddfea1c418e22e889ff1a845, type: 2}
   PlayerPrefab: {fileID: 668555469621821653, guid: c4e01180182b3a642baebe90be925697, type: 3}
   EnemyPrefab: {fileID: -1213627415679719105, guid: d3f412ecb0cd3584abbaa24ce184fab5, type: 3}
   BossPrefab: {fileID: 4394024614264777049, guid: c4e3ab7dab1c09d4fb58052979e481ab, type: 3}
-  EnemySpawnPeriod: 3
+  EnemySpawnPeriod: 1
   EnemiesBeforeBossCount: 2
   HpViewPrefab: {fileID: 3278792509885523871, guid: 03800ae2696370c4eba05fc3c7efd934, type: 3}
   DamageViewPrefab: {fileID: 7617743082526221650, guid: 21db3640bcabbf84c97172b7ba92e22c, type: 3}

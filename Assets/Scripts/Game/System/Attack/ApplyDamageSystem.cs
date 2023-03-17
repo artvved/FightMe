@@ -30,11 +30,13 @@ namespace Game.System
         {
             foreach (var eventEntity in damageEventFilter)
             {
+                
                 var applyDamageEventComponent = applyDamagePool.Value.Get(eventEntity);
                 if (applyDamageEventComponent.Target.Unpack(world,out int targetEntity))
                 {
                     ref var unitComponent = ref unitPool.Value.Get(targetEntity);
                     unitComponent.Hp -= applyDamageEventComponent.Damage;
+                   
                     if (unitComponent.Hp<=0)
                     {
                         if (!deadPool.Value.Has(targetEntity))

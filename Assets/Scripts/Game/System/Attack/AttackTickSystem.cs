@@ -41,7 +41,6 @@ namespace Game.System
                 if (attackTickComponent.Value <= 0)
                 {
                     ref var createAttackEventComponent = ref createAttackPool.NewEntity(out int eventEnt);
-                    createAttackEventComponent.Creator = world.PackEntity(entity);
                     createAttackEventComponent.Target = attackTargetPool.Value.Get(entity).Value;
                     createAttackEventComponent.Damage = unitPool.Value.Get(entity).Damage;
                         

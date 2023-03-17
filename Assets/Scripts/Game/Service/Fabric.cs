@@ -20,10 +20,11 @@ namespace Game.Service
         private EcsPool<PlayerTag> playerPool;
         private EcsPool<AllyTag> allyPool;
         private EcsPool<EnemyTag> enemyPool;
-       
+        private EcsPool<BossTag> bossPool;
+        
         private EcsPool<UnitComponent> unitPool;
         private EcsPool<SpeedComponent> speedPool;
-        private EcsPool<DirectionComponent> directionPool;
+        private EcsPool<ChainLightningTickComponent> chainLightningTickPool;
        
         private EcsPool<LifetimeComponent> lifetimePool;
         private EcsPool<BaseViewComponent> baseViewPool;
@@ -42,10 +43,11 @@ namespace Game.Service
             playerPool = world.GetPool<PlayerTag>();
             allyPool = world.GetPool<AllyTag>();
             enemyPool = world.GetPool<EnemyTag>();
+            bossPool = world.GetPool<BossTag>();
             
             unitPool = world.GetPool<UnitComponent>();
             speedPool = world.GetPool<SpeedComponent>();
-            directionPool = world.GetPool<DirectionComponent>();
+            chainLightningTickPool = world.GetPool<ChainLightningTickComponent>();
            
             lifetimePool = world.GetPool<LifetimeComponent>();
             baseViewPool = world.GetPool<BaseViewComponent>();
@@ -88,6 +90,9 @@ namespace Game.Service
             var playerEntity = InstantiateUnit(staticData.PlayerPrefab, Vector3.zero, staticData.PlayerStats);
             playerPool.Add(playerEntity);
             allyPool.Add(playerEntity);
+            ref var chainLightningTickComponent = ref chainLightningTickPool.Add(playerEntity);
+            chainLightningTickComponent.CurrentTime =
+                chainLightningTickComponent.Time = staticData.PlayerCasterStats.ChainLightningCD;
             return playerEntity;
         }
 
@@ -103,6 +108,7 @@ namespace Game.Service
         {
             var enemyEntity = InstantiateUnit(staticData.BossPrefab, pos, staticData.BossStats);
             enemyPool.Add(enemyEntity);
+            bossPool.Add(enemyEntity);
             return enemyEntity;
         }
     }

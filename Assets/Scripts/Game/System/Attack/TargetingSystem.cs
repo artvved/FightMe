@@ -11,6 +11,7 @@ namespace Game.System
     {
         private EcsWorld world;
 
+        private readonly EcsCustomInject<PositionService> service = default;
         private readonly EcsPoolInject<AttackTargetComponent> attackTargetPool = default;
         private readonly EcsPoolInject<UnitViewComponent> unitTransformPool = default;
         private readonly EcsPoolInject<EnemyTag> enemyPool = default;
@@ -45,7 +46,18 @@ namespace Game.System
 
             foreach (var entity in targetAttackFilter)
             {
-                var target = GetClosestTargetForEnemy(entity);
+                EcsFilter filter;
+                //check if it is enemy
+                if (enemyPool.Value.Has(entity))
+                {
+                    filter = allyTransformFilter;
+                }
+                else
+                {
+                    filter = enemyTransformFilter;
+                }
+                var target = service.Value.GetClosestTarget(entity,filter);
+                
                 if (target != -1)
                 {
                     if (attackTargetPool.Value.Has(entity))
@@ -61,34 +73,6 @@ namespace Game.System
             }
         }
 
-        private int GetClosestTargetForEnemy(int entity)
-        {
-            EcsFilter filter;
-            //check if it is enemy
-            if (enemyPool.Value.Has(entity))
-            {
-                filter = allyTransformFilter;
-            }
-            else
-            {
-                filter = enemyTransformFilter;
-            }
-
-            var entPos = unitTransformPool.Value.Get(entity).Value.transform.position;
-            int closest = -1;
-            float range = -1;
-            foreach (var target in filter)
-            {
-                var allyPos = unitTransformPool.Value.Get(target).Value.transform.position;
-                if (closest == -1 || (entPos - allyPos).magnitude < range)
-                {
-                    closest = target;
-                    range = (entPos - allyPos).magnitude;
-                }
-            }
-
-          
-            return closest;
-        }
+       
     }
 }

@@ -13,6 +13,7 @@ namespace ScriptableData
         public Camera UICamera;
         
         public CoinsView CoinsView;
-       
+        public SpellButtonCDView ChainLightningButtonCdView;
+
     }
 }

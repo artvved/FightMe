@@ -13,6 +13,7 @@ namespace Game.System
     public class RangeCrossingSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld world;
+        private readonly EcsCustomInject<PositionService> service = default;
         
         readonly EcsPoolInject<BaseViewComponent> transformPool=default;
         readonly EcsPoolInject<UnitComponent> unitPool=default;
@@ -45,7 +46,7 @@ namespace Game.System
                 var position = transformPool.Value.Get(unit).Value.transform.position;
                 var targetPosition = transformPool.Value.Get(target).Value.transform.position;
 
-                var inRange = IsInRange(position, targetPosition, range);
+                var inRange = service.Value.IsInRange(position, targetPosition, range);
                 if (inRange)
                 {
                     cantMovePool.Value.Add(unit);
@@ -63,9 +64,6 @@ namespace Game.System
         
        
 
-        private bool IsInRange(Vector3 pos1, Vector3 pos2, float range)
-        {
-            return (pos1 - pos2).magnitude <= range;
-    }
+       
     }
 }
