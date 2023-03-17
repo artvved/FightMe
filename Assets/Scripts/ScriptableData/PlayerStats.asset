@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 0
   MaxHp: 300
-  Damage: 10
-  Range: 2
-  AttackRatio: 1
+  Damage: 5
+  Range: 4
+  AttackRatio: 2
   Coins: 0
   HpRegenValue: 5
   HpRegenSpeed: 5

@@ -1,12 +1,14 @@
-﻿namespace DefaultNamespace
+﻿public static class Idents
 {
-    public static class Idents
+    public static class Worlds
     {
-        public static class Ui
-        {
-            public const string Damage = "Damage";
-            public const string Health = "Health";
-            public const string AttackSpeed = "AttackSpeed";
-        }
+        public const string EVENT_WORLD = "Event";
+    }
+
+    public static class Ui
+    {
+        public const string ChainLightning = "ChainLightning";
+        public const string MindControl = "MindControl";
+        public const string Meteor = "Meteor";
     }
 }

@@ -15,7 +15,7 @@ public class Startup : MonoBehaviour
 {
     private EcsWorld world;
     private EcsSystems systems;
-    public const string EVENT_WORLD = "Event";
+  
 
     [SerializeField]
     private SceneData sceneData;
@@ -26,6 +26,7 @@ public class Startup : MonoBehaviour
         world = new EcsWorld();
         var eventWorld = new EcsWorld();
         systems = new EcsSystems(world);
+        var EVENT_WORLD = Idents.Worlds.EVENT_WORLD;
         
         systems
             .AddWorld(eventWorld,EVENT_WORLD)

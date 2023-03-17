@@ -16,7 +16,7 @@ namespace Game.System
 
         private readonly EcsCustomInject<StaticData> staticData = default;
 
-        private readonly EcsPoolInject<EnemySpawnEventComponent> enemySpawnEventPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<EnemySpawnEventComponent> enemySpawnEventPool = Idents.Worlds.EVENT_WORLD;
 
         private readonly EcsPoolInject<TickComponent> tickPool = default;
         private readonly EcsPoolInject<SpawnEnemyTickComponent> spawnEnemyTickPool = default;

@@ -14,7 +14,7 @@ namespace Game.System
         
         private readonly EcsPoolInject<UnitComponent> unitPool = default;
         private readonly EcsPoolInject<DeadTag> deadPool = default;
-        private readonly EcsPoolInject<ApplyDamageEventComponent> applyDamagePool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<ApplyDamageEventComponent> applyDamagePool = Idents.Worlds.EVENT_WORLD;
 
         private EcsFilter damageEventFilter;
 
@@ -22,7 +22,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Startup.EVENT_WORLD);
+            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
             damageEventFilter = eventWorld.Filter<ApplyDamageEventComponent>().End();
         }
 

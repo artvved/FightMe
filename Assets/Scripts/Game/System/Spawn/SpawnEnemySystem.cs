@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace;
 using Game.Component;
 using Game.Service;
 using Leopotam.EcsLite;
@@ -17,7 +18,7 @@ namespace Game.System
         private readonly EcsCustomInject<Fabric> fabric = default;
         private readonly EcsCustomInject<StaticData> staticData = default;
 
-        private readonly EcsPoolInject<EnemySpawnEventComponent> enemySpawnEventPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<EnemySpawnEventComponent> enemySpawnEventPool = Idents.Worlds.EVENT_WORLD;
         private readonly EcsPoolInject<UnitViewComponent> playerTransformPool = default;
         private readonly EcsPoolInject<DirectionComponent> directionPool = default;
         private readonly EcsPoolInject<EnemySpawnedBeforeBossCountComponent> enemyCountPool = default;
@@ -30,7 +31,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Startup.EVENT_WORLD);
+            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
 
             playerFilter = world.Filter<PlayerTag>().Inc<UnitViewComponent>().End();
             eventFilter = eventWorld.Filter<EnemySpawnEventComponent>().End();

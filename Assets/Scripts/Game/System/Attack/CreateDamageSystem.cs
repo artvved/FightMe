@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using Game.Component;
 using Game.Service;
 using Leopotam.EcsLite;
@@ -13,8 +14,8 @@ namespace Game.System
         private EcsWorld eventWorld;
 
        
-        private readonly EcsPoolInject<ApplyDamageEventComponent> applyDamagePool = Startup.EVENT_WORLD;
-        private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<ApplyDamageEventComponent> applyDamagePool = Idents.Worlds.EVENT_WORLD;
+        private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Idents.Worlds.EVENT_WORLD;
         private readonly EcsPoolInject<PlayerTag> playerPool = default;
       
         private EcsFilter eventFilter;
@@ -23,7 +24,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Startup.EVENT_WORLD);
+            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
             eventFilter = eventWorld.Filter<CreateAttackEventComponent>().End();
            
         }

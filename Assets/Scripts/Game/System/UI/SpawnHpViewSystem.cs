@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using Game.Component;
 using Game.Component.View;
 using Game.Service;
@@ -18,7 +19,7 @@ namespace Game.System
         private readonly EcsCustomInject<SceneData> sceneData = default;
         private readonly EcsCustomInject<StaticData> staticData = default;
 
-        private readonly EcsPoolInject<SpawnHpViewEventComponent> spawnEventPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<SpawnHpViewEventComponent> spawnEventPool = Idents.Worlds.EVENT_WORLD;
         private readonly EcsPoolInject<HpViewComponent> hpViewPool = default;
         private readonly EcsPoolInject<UnitComponent> unitPool = default;
 
@@ -29,7 +30,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Startup.EVENT_WORLD);
+            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
 
             spawnEventFilter = eventWorld.Filter<SpawnHpViewEventComponent>().End();
         }

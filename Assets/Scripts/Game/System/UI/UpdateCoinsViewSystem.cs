@@ -24,7 +24,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Startup.EVENT_WORLD);
+            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
             eventFilter = eventWorld.Filter<CoinsChangedEventComponent>().End();
             playerFilter = world.Filter<PlayerTag>().End();
         }

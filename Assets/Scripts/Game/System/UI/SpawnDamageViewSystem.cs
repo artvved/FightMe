@@ -18,7 +18,7 @@ namespace Game.System
         private readonly EcsCustomInject<SceneData> sceneData = default;
         private readonly EcsCustomInject<StaticData> staticData = default;
 
-        private readonly EcsPoolInject<ApplyDamageEventComponent> eventPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<ApplyDamageEventComponent> eventPool = Idents.Worlds.EVENT_WORLD;
         private readonly EcsPoolInject<UnitViewComponent> unitTransformPool = default;
         private readonly EcsPoolInject<LifetimeComponent> lifetimePool = default;
         private readonly EcsPoolInject<DamageViewComponent> damageViewPool = default;
@@ -30,7 +30,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Startup.EVENT_WORLD);
+            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
 
             eventFilter = eventWorld.Filter<ApplyDamageEventComponent>().End();
         }

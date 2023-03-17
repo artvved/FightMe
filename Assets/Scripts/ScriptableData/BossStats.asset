@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fb8fbb7b254fdda61cb71497385c6c, type: 3}
   m_Name: BossStats
   m_EditorClassIdentifier: 
-  Speed: 0.5
+  Speed: 0.25
   MaxHp: 100
   Damage: 3
   Range: 1

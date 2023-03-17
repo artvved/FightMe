@@ -13,7 +13,7 @@ namespace Game.System
         private EcsWorld world;
         
         private readonly EcsPoolInject<UnitComponent> unitPool = default;
-        private readonly EcsPoolInject<CoinsChangedEventComponent> eventPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<CoinsChangedEventComponent> eventPool = Idents.Worlds.EVENT_WORLD;
         
         private EcsFilter deadFilter;
         private EcsFilter playerFilter;

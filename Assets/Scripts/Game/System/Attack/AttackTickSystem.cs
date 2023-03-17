@@ -15,7 +15,7 @@ namespace Game.System
         private readonly EcsPoolInject<AttackTargetComponent> attackTargetPool = default;
         private readonly EcsPoolInject<UnitComponent> unitPool = default;
        
-        private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Startup.EVENT_WORLD;
+        private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Idents.Worlds.EVENT_WORLD;
 
         private EcsFilter attackTickFilter;
 
