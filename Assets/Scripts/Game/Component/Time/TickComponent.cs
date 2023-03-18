@@ -2,6 +2,7 @@
 {
     public struct TickComponent
     {
-        public float Value;
+        public float FinalTime;
+        public float CurrentTime;
     }
 }

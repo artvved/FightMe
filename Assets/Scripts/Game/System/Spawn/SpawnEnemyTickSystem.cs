@@ -19,7 +19,6 @@ namespace Game.System
         private readonly EcsPoolInject<EnemySpawnEventComponent> enemySpawnEventPool = Idents.Worlds.EVENT_WORLD;
 
         private readonly EcsPoolInject<TickComponent> tickPool = default;
-        private readonly EcsPoolInject<SpawnEnemyTickComponent> spawnEnemyTickPool = default;
         private readonly EcsPoolInject<EnemySpawnedBeforeBossCountComponent> enemyCountPool = default;
 
         private EcsFilter filter;
@@ -27,13 +26,11 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-
-
-            filter = world.Filter<TickComponent>().Inc<SpawnEnemyTickComponent>().End();
+            
+            filter = world.Filter<TickComponent>().Inc<EnemySpawnedBeforeBossCountComponent>().End();
 
             var newEntity = world.NewEntity();
-            tickPool.Value.Add(newEntity);
-            spawnEnemyTickPool.Value.Add(newEntity).Value = staticData.Value.EnemySpawnPeriod;
+            tickPool.Value.Add(newEntity).FinalTime=staticData.Value.EnemySpawnPeriod;
             enemyCountPool.Value.Add(newEntity);
         }
 
@@ -42,10 +39,9 @@ namespace Game.System
             foreach (var entity in filter)
             {
                 ref var tickComponent = ref tickPool.Value.Get(entity);
-                var spawnTickComponent = spawnEnemyTickPool.Value.Get(entity);
-                if (tickComponent.Value >= spawnTickComponent.Value)
+                if (tickComponent.CurrentTime >= tickComponent.FinalTime)
                 {
-                    tickComponent.Value = 0;
+                    tickComponent.CurrentTime = 0;
                     enemySpawnEventPool.NewEntity(out int e).Count=1;
                 }
             }

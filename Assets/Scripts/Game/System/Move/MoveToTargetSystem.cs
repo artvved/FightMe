@@ -41,6 +41,7 @@ namespace Game.System
                 var entPos = transformPool.Value.Get(entity).Value.transform.position;
                 var targetPos = transformPool.Value.Get(target).Value.transform.position;
                 Vector2 range = targetPos - entPos;
+                
                 var dir = range.normalized;
 
                 if (directionPool.Value.Has(entity))

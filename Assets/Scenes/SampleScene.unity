@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.53555536, g: 0.6749756, b: 0.7830189, a: 1}
+  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -381,6 +381,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e39f2ce0fc6a4a9d903ccac25286bc98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &533440152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6793480555371854307, guid: 2dfb9bd623229c04598c9f2e895a3cc8, type: 3}
+  m_PrefabInstance: {fileID: 1111999181}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2d92e104eb4632935a8cf630d41586, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &534869066
@@ -1096,6 +1107,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 599791451685106152, guid: 2dfb9bd623229c04598c9f2e895a3cc8, type: 3}
   m_PrefabInstance: {fileID: 1655119347}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1743021462 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6793480555371854307, guid: 2dfb9bd623229c04598c9f2e895a3cc8, type: 3}
+  m_PrefabInstance: {fileID: 1655119347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2d92e104eb4632935a8cf630d41586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1789351887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1152,8 @@ MonoBehaviour:
   UICamera: {fileID: 963194227}
   CoinsView: {fileID: 1160829486}
   ChainLightningButtonCdView: {fileID: 7713853604560850869}
+  MindControlButtonCdView: {fileID: 1743021462}
+  MeteorButtonCdView: {fileID: 533440152}
 --- !u!4 &1789351889
 Transform:
   m_ObjectHideFlags: 0

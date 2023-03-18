@@ -15,6 +15,7 @@ namespace ScriptableData
         public PlayerView PlayerPrefab;
         public EnemyView EnemyPrefab;
         public EnemyView BossPrefab;
+        public BaseView MeteorPrefab;
         
         public float EnemySpawnPeriod;
         public int EnemiesBeforeBossCount;

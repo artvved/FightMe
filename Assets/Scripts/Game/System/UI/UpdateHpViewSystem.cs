@@ -27,7 +27,7 @@ namespace Game.System
         public void Init(IEcsSystems systems)
         {
             world = systems.GetWorld();
-            unitFilter = world.Filter<HpViewComponent>().End();
+            unitFilter = world.Filter<HpViewComponent>().Exc<DeadTag>().End();
         }
 
         public void Run(IEcsSystems systems)

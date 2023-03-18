@@ -14,6 +14,9 @@ namespace ScriptableData
         
         public CoinsView CoinsView;
         public SpellButtonCDView ChainLightningButtonCdView;
+        public SpellButtonCDView MindControlButtonCdView;
+        public SpellButtonCDView MeteorButtonCdView;
+
 
     }
 }

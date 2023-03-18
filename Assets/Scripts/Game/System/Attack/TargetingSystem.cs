@@ -13,11 +13,11 @@ namespace Game.System
 
         private readonly EcsCustomInject<PositionService> service = default;
         private readonly EcsPoolInject<AttackTargetComponent> attackTargetPool = default;
-        private readonly EcsPoolInject<UnitViewComponent> unitTransformPool = default;
+        private readonly EcsPoolInject<AttackTickComponent> attackTickPool = default;
         private readonly EcsPoolInject<EnemyTag> enemyPool = default;
-      
+        private readonly EcsPoolInject<AllyTag> allyPool = default;
 
-        private EcsFilter notAliveTargetAttackFilter;
+        private EcsFilter nonValidTargetAttackFilter;
         private EcsFilter targetAttackFilter;
 
         private EcsFilter allyTransformFilter;
@@ -27,20 +27,32 @@ namespace Game.System
         {
             world = systems.GetWorld();
 
-            notAliveTargetAttackFilter = world.Filter<AttackTargetComponent>().End();
+            nonValidTargetAttackFilter = world.Filter<AttackTargetComponent>().End();
             targetAttackFilter = world.Filter<UnitComponent>().End();
             allyTransformFilter = world.Filter<AllyTag>().Inc<UnitViewComponent>().End();
             enemyTransformFilter = world.Filter<EnemyTag>().Inc<UnitViewComponent>().End();
         }
 
+        private bool CheckSides(int ent, int target)
+        {
+            return (enemyPool.Value.Has(ent) && allyPool.Value.Has(target))
+                   || (allyPool.Value.Has(ent) && enemyPool.Value.Has(target));
+        }
+
         public void Run(IEcsSystems systems)
         {
-            //clear not alive targets
-            foreach (var entity in notAliveTargetAttackFilter)
+            //clear not alive and wrong targets
+            foreach (var entity in nonValidTargetAttackFilter)
             {
-                if (!attackTargetPool.Value.Get(entity).Value.Unpack(world, out int alive))
+                if (!attackTargetPool.Value.Get(entity).Value.Unpack(world, out int target))
                 {
                     attackTargetPool.Value.Del(entity);
+                    attackTickPool.Value.Del(entity);
+                }
+                else if (!CheckSides(entity, target))
+                {
+                    attackTargetPool.Value.Del(entity);
+                    attackTickPool.Value.Del(entity);
                 }
             }
 
@@ -56,8 +68,9 @@ namespace Game.System
                 {
                     filter = enemyTransformFilter;
                 }
-                var target = service.Value.GetClosestTarget(entity,filter);
-                
+
+                var target = service.Value.GetClosestTarget(entity, filter);
+
                 if (target != -1)
                 {
                     if (attackTargetPool.Value.Has(entity))
@@ -68,11 +81,8 @@ namespace Game.System
                     {
                         attackTargetPool.Value.Add(entity).Value = world.PackEntity(target);
                     }
-                    
                 }
             }
         }
-
-       
     }
 }

@@ -16,7 +16,7 @@ namespace Game.System
         private EcsWorld world;
         
         private readonly EcsPoolInject<TickComponent> tickPool = default;
-        private readonly EcsPoolInject<ChainLightningTickComponent> spellTickPool = default;
+     
         
         private EcsFilter tickFilter;
         private EcsFilter spellTickFilter;
@@ -25,7 +25,7 @@ namespace Game.System
         {
             world = systems.GetWorld();
             tickFilter = world.Filter<TickComponent>().End();
-            spellTickFilter = world.Filter<ChainLightningTickComponent>().End();
+            
         }
 
         public void Run(IEcsSystems systems)
@@ -33,13 +33,9 @@ namespace Game.System
             foreach (var entity in tickFilter)
             {
                 ref var time = ref tickPool.Value.Get(entity);
-                time.Value += Time.deltaTime;
-            }
-            foreach (var entity in spellTickFilter)
-            {
-                ref var time = ref spellTickPool.Value.Get(entity);
                 time.CurrentTime += Time.deltaTime;
             }
+           
         }
     }
 }

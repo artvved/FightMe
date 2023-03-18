@@ -49,7 +49,10 @@ namespace Game.System
                 var inRange = service.Value.IsInRange(position, targetPosition, range);
                 if (inRange)
                 {
-                    cantMovePool.Value.Add(unit);
+                    if (!cantMovePool.Value.Has(unit))
+                    {
+                        cantMovePool.Value.Add(unit);
+                    }
                     attackingTickPool.Value.Add(unit);
                 }
                 

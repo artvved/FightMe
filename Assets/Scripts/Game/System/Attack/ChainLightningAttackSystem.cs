@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using DefaultNamespace.Game.Component.Spell;
 using Game.Component;
+using Game.Component.Time;
 using Game.Service;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -18,7 +20,7 @@ namespace Game.System
         private readonly EcsCustomInject<PositionService> service = default;
 
 
-        private readonly EcsPoolInject<ChainLightningTickComponent> spellTickPool = default;
+        private readonly EcsPoolInject<TickComponent> spellTickPool = default;
         private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Idents.Worlds.EVENT_WORLD;
 
         private EcsFilter spellEventFilter;
@@ -32,7 +34,7 @@ namespace Game.System
             eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
 
             spellEventFilter = eventWorld.Filter<ChainLightningSpellEventComponent>().End();
-            spellTickFilter = world.Filter<ChainLightningTickComponent>().End();
+            spellTickFilter = world.Filter<TickComponent>().Inc<ChainLightningSpellTag>().End();
             enemyTransformFilter = world.Filter<EnemyTag>().Inc<UnitViewComponent>().End();
             playerFilter = world.Filter<PlayerTag>().Inc<UnitViewComponent>().End();
         }
@@ -45,7 +47,7 @@ namespace Game.System
                 {
                     ref var component = ref spellTickPool.Value.Get(spellTick);
 
-                    if (component.CurrentTime >= component.Time)
+                    if (component.CurrentTime >= component.FinalTime)
                     {
                         CastChainLightning();
                         component.CurrentTime = 0;

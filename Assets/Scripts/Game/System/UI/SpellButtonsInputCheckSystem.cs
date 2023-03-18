@@ -12,25 +12,32 @@ using UnityEngine.Scripting;
 
 namespace Game.System
 {
-    public class SpellButtonsInputCheckSystem : EcsUguiCallbackSystem , IEcsInitSystem
+    public class SpellButtonsInputCheckSystem : EcsUguiCallbackSystem 
     {
-        private EcsWorld world;
-        private EcsWorld eventWorld;
-        private readonly EcsPoolInject<ChainLightningSpellEventComponent> eventPool = Idents.Worlds.EVENT_WORLD;
-
-
-     
-        public void Init(IEcsSystems systems)
-        {
-            world = systems.GetWorld();
-            eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
-        }
+        private readonly EcsPoolInject<ChainLightningSpellEventComponent> clEventPool = Idents.Worlds.EVENT_WORLD;
+        private readonly EcsPoolInject<MindControlSpellEventComponent> mindControlEventPool = Idents.Worlds.EVENT_WORLD;
+        private readonly EcsPoolInject<MeteorSpellEventComponent> meteorEventPool = Idents.Worlds.EVENT_WORLD;
+        
 
         [Preserve]
         [EcsUguiClickEvent (Idents.Ui.ChainLightning, Idents.Worlds.EVENT_WORLD)]
         void OnClickChainLightning (in EcsUguiClickEvent e)
         {
-            eventPool.NewEntity(out var entity);
+            clEventPool.NewEntity(out var entity);
+        }
+        
+        [Preserve]
+        [EcsUguiClickEvent (Idents.Ui.MindControl, Idents.Worlds.EVENT_WORLD)]
+        void OnClickMindControl (in EcsUguiClickEvent e)
+        {
+            mindControlEventPool.NewEntity(out var entity);
+        }
+        
+        [Preserve]
+        [EcsUguiClickEvent (Idents.Ui.Meteor, Idents.Worlds.EVENT_WORLD)]
+        void OnClickMeteor (in EcsUguiClickEvent e)
+        {
+            meteorEventPool.NewEntity(out var entity);
         }
     }
 }

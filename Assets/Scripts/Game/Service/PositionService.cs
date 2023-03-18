@@ -13,7 +13,7 @@ namespace Game.Service
     {
         private EcsWorld world;
 
-        private EcsPool<UnitViewComponent> unitTransformPool;
+        private EcsPool<BaseViewComponent> baseTransformPool;
         private EcsPool<PlayerTag> playerPool;
         private EcsPool<AllyTag> allyPool;
         private EcsPool<EnemyTag> enemyPool;
@@ -22,10 +22,8 @@ namespace Game.Service
         public PositionService(EcsWorld world)
         {
             this.world = world;
-            
-            
 
-            unitTransformPool = world.GetPool<UnitViewComponent>();
+            baseTransformPool = world.GetPool<BaseViewComponent>();
             
             playerPool = world.GetPool<PlayerTag>();
             allyPool = world.GetPool<AllyTag>();
@@ -36,12 +34,12 @@ namespace Game.Service
         
         public int GetClosestTarget(int entity,EcsFilter filter)
         {
-            var entPos = unitTransformPool.Get(entity).Value.transform.position;
+            var entPos = baseTransformPool.Get(entity).Value.transform.position;
             int closest = -1;
             float range = -1;
             foreach (var target in filter)
             {
-                var allyPos = unitTransformPool.Get(target).Value.transform.position;
+                var allyPos = baseTransformPool.Get(target).Value.transform.position;
                 if (closest == -1 || (entPos - allyPos).magnitude < range)
                 {
                     closest = target;
@@ -52,14 +50,25 @@ namespace Game.Service
             return closest;
         }
         
+        public int GetRandomTarget(EcsFilter filter)
+        {
+            List<int> list = new List<int>();
+            foreach (var target in filter)
+            {
+                list.Add(target);
+            }
+            
+            return list[Random.Range(0,list.Count)];
+        }
+        
         public List<int> GetTargetsInRange(int entity,EcsFilter filter,float range)
         {
             List<int> list = new List<int>();
-            var entPos = unitTransformPool.Get(entity).Value.transform.position;
+            var entPos = baseTransformPool.Get(entity).Value.transform.position;
             
             foreach (var target in filter)
             {
-                var pos2 = unitTransformPool.Get(target).Value.transform.position;
+                var pos2 = baseTransformPool.Get(target).Value.transform.position;
                
                 if (IsInRange(entPos,pos2,range))
                 {
@@ -73,8 +82,8 @@ namespace Game.Service
         public int GetClosestTargetWithRange(int entity, EcsFilter filter,float range)
         {
             var closestTarget = GetClosestTarget(entity, filter);
-            var pos1 = unitTransformPool.Get(entity).Value.transform.position;
-            var pos2 = unitTransformPool.Get(closestTarget).Value.transform.position;
+            var pos1 = baseTransformPool.Get(entity).Value.transform.position;
+            var pos2 = baseTransformPool.Get(closestTarget).Value.transform.position;
             
             if (!IsInRange(pos1,pos2,range))
             {

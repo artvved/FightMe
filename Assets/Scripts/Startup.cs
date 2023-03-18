@@ -41,13 +41,15 @@ public class Startup : MonoBehaviour
             .Add(new TargetingSystem())
             
             .Add(new MoveToTargetSystem())
+            .Add(new MoveToPositionSystem())
             .Add(new MoveApplySystem())
             
             .Add(new RangeCrossingSystem())
             
             .Add(new AttackTickSystem())
             .Add(new ChainLightningAttackSystem())
-            
+            .Add(new MindControlAttackSystem())
+            .Add(new MeteorAttackSystem())
             .Add(new CreateDamageSystem())
 
            
@@ -66,7 +68,11 @@ public class Startup : MonoBehaviour
             .Add(new UpdateHpViewSystem())
             .Add(new UpdateSpellButtonsCDSystem())
             
+            //spells
             .DelHere<ChainLightningSpellEventComponent>(EVENT_WORLD)
+            .DelHere<MindControlSpellEventComponent>(EVENT_WORLD)
+            .DelHere<MeteorSpellEventComponent>(EVENT_WORLD)
+            
             .DelHere<CoinsChangedEventComponent>(EVENT_WORLD)
             .DelHere<ApplyDamageEventComponent>(EVENT_WORLD)
             .DelHere<CreateAttackEventComponent>(EVENT_WORLD)
@@ -76,7 +82,7 @@ public class Startup : MonoBehaviour
             .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
             .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem (EVENT_WORLD))
 #endif
-            .Inject(new Fabric(world,eventWorld,staticData))
+            .Inject(new Fabric(world,eventWorld,staticData,sceneData))
             .Inject(sceneData)
             .Inject(staticData)
             .Inject(new PositionService(world))
