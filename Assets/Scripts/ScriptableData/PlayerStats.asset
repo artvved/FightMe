@@ -18,5 +18,5 @@ MonoBehaviour:
   Range: 4
   AttackRatio: 2
   Coins: 0
-  HpRegenValue: 5
+  HpRegenValue: 1
   HpRegenSpeed: 5

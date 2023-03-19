@@ -7,7 +7,6 @@ using Leopotam.EcsLite;
 using Mitfart.LeoECSLite.UnityIntegration;
 using ScriptableData;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Game.Service
 {

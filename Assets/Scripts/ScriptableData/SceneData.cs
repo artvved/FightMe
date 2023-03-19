@@ -17,6 +17,8 @@ namespace ScriptableData
         public SpellButtonCDView MindControlButtonCdView;
         public SpellButtonCDView MeteorButtonCdView;
 
+        public GameOverPopupView GameOverPopupView;
+
 
     }
 }

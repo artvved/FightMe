@@ -14,6 +14,7 @@ using UnityEngine;
 public class Startup : MonoBehaviour
 {
     private EcsWorld world;
+    private EcsWorld eventWorld;
     private EcsSystems systems;
   
 
@@ -24,7 +25,7 @@ public class Startup : MonoBehaviour
     void Start()
     {
         world = new EcsWorld();
-        var eventWorld = new EcsWorld();
+        eventWorld = new EcsWorld();
         systems = new EcsSystems(world);
         var EVENT_WORLD = Idents.Worlds.EVENT_WORLD;
         
@@ -55,11 +56,12 @@ public class Startup : MonoBehaviour
             .Add(new TargetingOffenderSystem())
             
             .Add(new CreateDamageSystem())
-           
-            
             .Add(new ApplyDamageSystem())
             
             .Add(new CoinGainSystem())
+            .Add(new GameOverDetectionSystem())
+            .Add(new GameOverUIPopupSystem())
+            .Add(new RestartGameSystem())
             
             .Add(new SpawnHpViewSystem())
             .Add(new SpawnDamageViewSystem())
@@ -76,6 +78,7 @@ public class Startup : MonoBehaviour
             .DelHere<MindControlSpellEventComponent>(EVENT_WORLD)
             .DelHere<MeteorSpellEventComponent>(EVENT_WORLD)
             
+            .DelHere<GameOverEventComponent>(EVENT_WORLD)
             .DelHere<CoinsChangedEventComponent>(EVENT_WORLD)
             .DelHere<ApplyDamageEventComponent>(EVENT_WORLD)
             .DelHere<CreateAttackEventComponent>(EVENT_WORLD)
@@ -114,6 +117,12 @@ public class Startup : MonoBehaviour
         {
             world.Destroy();
             world = null;
+        }
+        
+        if (eventWorld!=null)
+        {
+            eventWorld.Destroy();
+            eventWorld = null;
         }
     }
 }

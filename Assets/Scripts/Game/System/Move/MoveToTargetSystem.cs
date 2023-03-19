@@ -15,9 +15,6 @@ namespace Game.System
         private EcsWorld world;
 
         readonly EcsPoolInject<BaseViewComponent> transformPool = default;
-
-        readonly EcsPoolInject<CantMoveComponent> cantMovePool = default;
-        readonly EcsPoolInject<UnitComponent> unitPool = default;
         readonly EcsPoolInject<DirectionComponent> directionPool = default;
         readonly EcsPoolInject<AttackTargetComponent> targetPool = default;
 

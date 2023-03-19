@@ -10,20 +10,18 @@ namespace Game.System
 {
     public class CreateDamageSystem : IEcsInitSystem, IEcsRunSystem
     {
-        private EcsWorld world;
+       
         private EcsWorld eventWorld;
 
        
         private readonly EcsPoolInject<ApplyDamageEventComponent> applyDamagePool = Idents.Worlds.EVENT_WORLD;
         private readonly EcsPoolInject<CreateAttackEventComponent> createAttackPool = Idents.Worlds.EVENT_WORLD;
-        private readonly EcsPoolInject<PlayerTag> playerPool = default;
-      
+
         private EcsFilter eventFilter;
 
 
         public void Init(IEcsSystems systems)
         {
-            world = systems.GetWorld();
             eventWorld = systems.GetWorld(Idents.Worlds.EVENT_WORLD);
             eventFilter = eventWorld.Filter<CreateAttackEventComponent>().End();
            

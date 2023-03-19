@@ -20,7 +20,6 @@ namespace Game.System
 
         private readonly EcsPoolInject<EnemySpawnEventComponent> enemySpawnEventPool = Idents.Worlds.EVENT_WORLD;
         private readonly EcsPoolInject<UnitViewComponent> playerTransformPool = default;
-        private readonly EcsPoolInject<DirectionComponent> directionPool = default;
         private readonly EcsPoolInject<EnemySpawnedBeforeBossCountComponent> enemyCountPool = default;
 
         private EcsFilter eventFilter;
