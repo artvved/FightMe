@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.System
 {
-    public class TargetingSystem : IEcsInitSystem, IEcsRunSystem
+    public class TargetingClosestSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld world;
 

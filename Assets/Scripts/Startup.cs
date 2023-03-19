@@ -38,7 +38,7 @@ public class Startup : MonoBehaviour
             .Add(new SpawnEnemyTickSystem())
             .Add(new SpawnEnemySystem())
             
-            .Add(new TargetingSystem())
+            .Add(new TargetingClosestSystem())
             
             .Add(new MoveToTargetSystem())
             .Add(new MoveToPositionSystem())
@@ -46,12 +46,15 @@ public class Startup : MonoBehaviour
             
             .Add(new RangeCrossingSystem())
             
-            .Add(new AttackTickSystem())
+            .Add(new CreateAttackTickSystem())
             .Add(new ChainLightningAttackSystem())
             .Add(new MindControlAttackSystem())
             .Add(new MeteorAttackSystem())
+            .Add(new BloodlustIncreaseAttackSystem())
+            .Add(new LifestealSystem())
+            .Add(new TargetingOffenderSystem())
+            
             .Add(new CreateDamageSystem())
-
            
             
             .Add(new ApplyDamageSystem())

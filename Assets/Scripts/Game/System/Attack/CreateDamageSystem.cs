@@ -33,8 +33,7 @@ namespace Game.System
         {
             foreach (var entity in eventFilter)
             {
-               //Debug.Log(entity + " e  "+" tar"+createAttackPool.Value.Get(entity).Target+"  d mg"+ createAttackPool.Value.Get(entity).Damage);
-                
+               
                 ref var applyDamageEventComponent = ref applyDamagePool.NewEntity(out int eventEnt);
                 applyDamageEventComponent.Target = createAttackPool.Value.Get(entity).Target;
                 applyDamageEventComponent.Damage = createAttackPool.Value.Get(entity).Damage;

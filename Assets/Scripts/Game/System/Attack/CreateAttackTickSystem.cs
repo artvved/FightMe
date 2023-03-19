@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game.System
 {
-    public class AttackTickSystem : IEcsInitSystem, IEcsRunSystem
+    public class CreateAttackTickSystem : IEcsInitSystem, IEcsRunSystem
     {
         private EcsWorld world;
         
@@ -41,6 +41,7 @@ namespace Game.System
                 if (attackTickComponent.Value <= 0)
                 {
                     ref var createAttackEventComponent = ref createAttackPool.NewEntity(out int eventEnt);
+                    createAttackEventComponent.Sender = world.PackEntity(entity);
                     createAttackEventComponent.Target = attackTargetPool.Value.Get(entity).Value;
                     createAttackEventComponent.Damage = unitPool.Value.Get(entity).Damage;
                         
